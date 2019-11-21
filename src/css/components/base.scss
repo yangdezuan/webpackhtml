@@ -1,0 +1,28 @@
+// 根元素大小使用 vw 单位
+$vw_design: 750;
+// rem 单位换算：定为 75px 只是方便运算，750px-75px、640-64px、1080px-108px，如此类推
+$vw_fontsize: 75; // iPhone 6尺寸的根元素大小基准值
+@function rem($px) {
+  @return ($px / $vw_fontsize) * 1rem;
+}
+@mixin backSize {
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+@mixin page {
+  height: 100%;
+  @include backSize;
+}
+
+/* public style
+===================================*/
+html {
+  font-size: ($vw_fontsize / $vw_design) * 100vw;
+  //同时，通过Media Queries 限制根元素最大最小值
+  @media screen and (max-width: 320px) {
+    font-size: 32px;
+  }
+  @media screen and (min-width: 540px) {
+    font-size: 54px;
+  }
+}
